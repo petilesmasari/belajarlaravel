@@ -2,34 +2,40 @@
 
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
-
-// Route::get('/', function () {
-//     return view(view: 'home');
-// });
-
-Route::get('/',[HomeController::class,'index']);
-
-Route::get('/about', [\App\Http\Controllers\AboutController::class, 'index']);
-
-Route::get('/contact', [\App\Http\Controllers\ContactController::class, 'index']);
-
-Route::get('/gallery', [\App\Http\Controllers\GalleryController::class, 'index']);
-
-// Route::get('/contact', function () {
-//     return view(view: 'contact');
-// });
-
-// Route::get('/gallery', function () {
-//     return view(view: 'gallery');
-// });
+use App\Http\Controllers\UserController;
 
 
-// Route::get('users', function() {
 
-//     $users = [
-//         ['id' => 1, 'name' => 'Opet', 'email' => 'opet09@gmail.com'],
-//         ['id' => 2, 'name' => 'Rahmad', 'email' => 'rahmadtahalu@gmail.com'],
-//     ];
-    
-//     return view('users.index', compact('users'));
-// });
+Route::get('/home',[HomeController::class,'index'])->name("home");
+
+Route::get('/about', [App\Http\Controllers\AboutController::class, 'index'])->name("about");
+
+Route::get('/contact', [App\Http\Controllers\ContactController::class, 'index']);
+
+Route::get('/gallery', [App\Http\Controllers\GalleryController::class, 'index']);
+
+
+Route::get('/user', [App\Http\Controllers\UserController::class, 'index']);
+
+Route::get('/users/create', [App\Http\Controllers\UserController::class, 'create']);
+
+Route::post('/user', [App\Http\Controllers\UserController::class,'store']);
+
+Route::get('/users/{user}', [App\Http\Controllers\UserController::class, 'show']);
+
+Route::get('users/{user:id}/edit', [App\Http\Controllers\UserController::class, 'edit']);
+
+Route::put('users/{user:id}', [App\Http\Controllers\UserController::class, 'update']);
+
+
+Route::get('articles/create',function(){
+    \App\Models\Article::create([
+        'title'=> $title = 'My first article',
+        'slug' => str($title) ->slug() .'-'.time(),
+        'body'=> $body ='This is the body of my first article',
+        'teaser' => $teaser = str($body)->limit(160),
+        'meta_title' => $title,
+        'meta_description' => $teaser,
+     ]);
+
+});

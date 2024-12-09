@@ -3,17 +3,19 @@
         <div class="flex h-16 items-center justify-between">
             <div class="flex items-center">
                 <!-- Logo -->
-                <div class="shrink-0">
-                    <img class="h-8 w-8" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+                <div class="flex items-center">
+                    <img src="{{ asset('lesma.png') }}" alt="Logo" class="h-8 w-auto">
                 </div>
+                
 
                 <!-- Desktop Navigation -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
-                        <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
+                        <x-nav-link href="{{route('home')}}" :active="request()->is('/home')">Home</x-nav-link>
                         <x-nav-link href="/about" :active="request()->is('about')">About</x-nav-link>
                         <x-nav-link href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
                         <x-nav-link href="/gallery" :active="request()->is('gallery')">Gallery</x-nav-link>
+                        <x-nav-link href="/user" :active="request()->is('user')">Users</x-nav-link>
                     </div>
                 </div>
             </div>
@@ -34,10 +36,11 @@
     <!-- Mobile Menu -->
     <div class="md:hidden" id="mobile-menu">
         <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-            <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
+            <x-nav-link href="/home" :active="request()->is('/home')">Home</x-nav-link>
             <x-nav-link href="/about" :active="request()->is('about')">About</x-nav-link>
             <x-nav-link href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
             <x-nav-link href="/gallery" :active="request()->is('gallery')">Gallery</x-nav-link>
+            <x-nav-link href="/user" :active="request()->is('user')">Users</x-nav-link>
         </div>
     </div>
 </nav>

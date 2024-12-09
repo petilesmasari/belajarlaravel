@@ -12,7 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('articles', function (Blueprint $table) {
-            //
+            
+            if (!Schema::hasColumn('articles', 'meta_title')) {
+                $table->string('meta_title')->after('body')->nullable();
+            }
         });
     }
 
@@ -22,7 +25,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('articles', function (Blueprint $table) {
-            //
+           //
         });
     }
 };
