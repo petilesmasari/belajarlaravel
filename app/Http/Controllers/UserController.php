@@ -26,7 +26,7 @@ class UserController extends Controller
                 'title' => 'Create New User',
                 'method' => 'post',
                 'url' => '/users',
-                'submit_text' => 'Update'
+                'submit_text' => 'Create'
             ],
         ]);
     }
@@ -34,9 +34,7 @@ class UserController extends Controller
     {
         User::create ($request->validated());
 
-        
-
-        return redirect('/user');
+        return redirect('/users');
     }
 
     public function show ($id)
@@ -55,7 +53,7 @@ class UserController extends Controller
             'page_meta' =>[
                 'title' => 'Edit User: '.$user->name,
                 'method' => 'put',
-                'url' => '/users'. $user->id,
+                'url' => '/users/'. $user->id,
                 'submit_text' => 'Update'
                 ],
         ]);

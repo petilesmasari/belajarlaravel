@@ -15,17 +15,17 @@ Route::get('/contact', [App\Http\Controllers\ContactController::class, 'index'])
 Route::get('/gallery', [App\Http\Controllers\GalleryController::class, 'index']);
 
 
-Route::get('/user', [App\Http\Controllers\UserController::class, 'index']);
+Route::get('/users', [App\Http\Controllers\UserController::class, 'index']);
 
-Route::get('/users/create', [App\Http\Controllers\UserController::class, 'create']);
+Route::get('/user/create', [App\Http\Controllers\UserController::class, 'create']);
 
-Route::post('/user', [App\Http\Controllers\UserController::class,'store']);
+Route::post('/users', [App\Http\Controllers\UserController::class,'store']);
 
 Route::get('/users/{user}', [App\Http\Controllers\UserController::class, 'show']);
 
-Route::get('users/{user:id}/edit', [App\Http\Controllers\UserController::class, 'edit']);
+Route::get('users/{user}/edit', [App\Http\Controllers\UserController::class, 'edit']);
 
-Route::put('users/{user:id}', [App\Http\Controllers\UserController::class, 'update']);
+Route::put('users/{user}', [App\Http\Controllers\UserController::class, 'update']);
 
 
 Route::get('articles/create',function(){
