@@ -25,7 +25,7 @@ class UserController extends Controller
             'page_meta' =>[
                 'title' => 'Create New User',
                 'method' => 'post',
-                'url' => '/users',
+                'url' => route('users.store'),
                 'submit_text' => 'Create'
             ],
         ]);
@@ -53,7 +53,7 @@ class UserController extends Controller
             'page_meta' =>[
                 'title' => 'Edit User: '.$user->name,
                 'method' => 'put',
-                'url' => '/users/'. $user->id,
+                'url' => route('users.update', $user),
                 'submit_text' => 'Update'
                 ],
         ]);
@@ -66,6 +66,17 @@ class UserController extends Controller
             // User -> update($request->only('name', 'email', 'password'));
             return redirect('/users');
     }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+        // return redirect(route('users.index'));
+        return to_route(route('users.index'));
+    }
+
+
+
+
     // protected function requestValidated(): array
     // {
     //     return[

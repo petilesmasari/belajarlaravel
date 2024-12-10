@@ -1,3 +1,5 @@
+@use(\Illuminate\Support\Facades\Auth)
+
 <nav class="bg-gray-800">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-16 items-center justify-between">
@@ -15,7 +17,24 @@
                         <x-nav-link href="/about" :active="request()->is('about')">About</x-nav-link>
                         <x-nav-link href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
                         <x-nav-link href="/gallery" :active="request()->is('gallery')">Gallery</x-nav-link>
-                        <x-nav-link href="/user" :active="request()->is('user')">Users</x-nav-link>
+                        
+
+                        @auth
+                        <x-nav-link href="{{ route('users.index')}}">Users</x-nav-link>
+                        
+                            <x-nav-link href="#">
+                                {{Auth::user()->name}}
+                            </x-nav-link>
+                            <form action="{{route('logout')}}" method="post">
+                                @csrf
+                                <x-button type="submit">
+                                    Logout
+                                </x-button>
+                            </form>
+                            @else
+                            <x-nav-link href="{{ route('login')}}">Login</x-nav-link>
+                        @endauth
+                        {{-- <x-nav-link href="{{ route('login')}}">Login</x-nav-link> --}}
                     </div>
                 </div>
             </div>
@@ -40,7 +59,7 @@
             <x-nav-link href="/about" :active="request()->is('about')">About</x-nav-link>
             <x-nav-link href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
             <x-nav-link href="/gallery" :active="request()->is('gallery')">Gallery</x-nav-link>
-            <x-nav-link href="/user" :active="request()->is('user')">Users</x-nav-link>
+            <x-nav-link href="/users" :active="request()->is('users')">Users</x-nav-link>
         </div>
     </div>
 </nav>

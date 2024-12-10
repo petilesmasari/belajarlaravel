@@ -1,32 +1,44 @@
 <?php
 
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 
 
 
-Route::get('/home',[HomeController::class,'index'])->name("home");
 
-Route::get('/about', [App\Http\Controllers\AboutController::class, 'index'])->name("about");
+Route::get('/',[Controllers\HomeController::class,'index'])->name("home");
 
-Route::get('/contact', [App\Http\Controllers\ContactController::class, 'index']);
+Route::get('/about', [Controllers\AboutController::class, 'index'])->name("about");
 
-Route::get('/gallery', [App\Http\Controllers\GalleryController::class, 'index']);
+Route::get('/contact', [Controllers\ContactController::class, 'index']);
+
+Route::get('/gallery', [Controllers\GalleryController::class, 'index']);
 
 
-Route::get('/users', [App\Http\Controllers\UserController::class, 'index']);
+Route::resource('users', Controllers\UserController::class)->middleware('auth');
 
-Route::get('/user/create', [App\Http\Controllers\UserController::class, 'create']);
+Route::get('login',[Controllers\LoginController::class, 'loginForm'])->middleware('guest');
 
-Route::post('/users', [App\Http\Controllers\UserController::class,'store']);
+Route::post('login',[Controllers\LoginController::class, 'authenticate'])->name('login')->middleware('guest');;
 
-Route::get('/users/{user}', [App\Http\Controllers\UserController::class, 'show']);
 
-Route::get('users/{user}/edit', [App\Http\Controllers\UserController::class, 'edit']);
+Route::post('logout', Controllers\LogoutController::class)->name('logout')->middleware('auth');
 
-Route::put('users/{user}', [App\Http\Controllers\UserController::class, 'update']);
+    // ->except(['destroy', 'show']);
 
+// Route::get('/users', [Controllers\UserController::class, 'index'])->name('users.index');
+
+// Route::get('/users/create', [Controllers\UserController::class, 'create'])->name('users.create');
+
+// Route::post('/users', [Controllers\UserController::class,'store'])->name('users.store');
+
+// Route::get('/users/{user}', [Controllers\UserController::class, 'show'])->name('users.show');
+
+// Route::get('users/{user}/edit', [Controllers\UserController::class, 'edit'])->name('users.edit');
+
+// Route::put('users/{user}', [Controllers\UserController::class, 'update'])->name('users.update');
+
+// Route::delete('users/{user:id}', [Controllers\UserController::class, 'destroy'])->name('users.destroy');
 
 Route::get('articles/create',function(){
     \App\Models\Article::create([
