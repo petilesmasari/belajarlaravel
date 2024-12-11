@@ -38,7 +38,7 @@ Route::post('logout', Controllers\LogoutController::class)->name('logout')->midd
 
 // Route::put('users/{user}', [Controllers\UserController::class, 'update'])->name('users.update');
 
-// Route::delete('users/{user:id}', [Controllers\UserController::class, 'destroy'])->name('users.destroy');
+Route::delete('users/{user:id}', [Controllers\UserController::class, 'destroy'])->name('users.destroy')->middleware('auth');
 
 Route::get('articles/create',function(){
     \App\Models\Article::create([
