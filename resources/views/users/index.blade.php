@@ -49,6 +49,29 @@
                             </a>  
                            </div>
 
+                           {{-- <form action="{{route('users.destroy', $user->id)}}" method="post" class="mt-6">
+                            @method('DELETE')
+                            @csrf
+                            <x-button type="submit">
+                                Delete
+                            </x-button>
+                        </form> --}}
+
+                        <!-- Delete Link -->
+                        <a href="#" class="hover:underline text-red-500"
+                           onclick="event.preventDefault(); 
+                                    if(confirm('Are you sure you want to delete this user?')) {
+                                        document.getElementById('delete-form-{{$user->id}}').submit();
+                                    }">
+                            Delete
+                        </a>
+                        
+                        <!-- Hidden Delete Form -->
+                        <form id="delete-form-{{$user->id}}" action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
+
                         </x-table.td>
                     </tr>
                 @endforeach

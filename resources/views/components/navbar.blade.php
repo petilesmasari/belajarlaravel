@@ -22,7 +22,7 @@
                         @auth
                         <x-nav-link href="{{ route('users.index')}}">Users</x-nav-link>
                         
-                            <x-nav-link href="#">
+                            <x-nav-link href="/users">
                                 {{Auth::user()->name}}
                             </x-nav-link>
                             <form action="{{route('logout')}}" method="post">
